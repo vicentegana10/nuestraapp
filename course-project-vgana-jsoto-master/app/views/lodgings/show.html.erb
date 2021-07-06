@@ -1,0 +1,88 @@
+<% if notice != nil%>
+  <div class="alert alert-primary" role="alert">
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+
+<p><strong>Title: </strong><%= @lodging.title %></p>
+<p><strong>Fee: </strong><%= @lodging.fee %></p>
+<p><strong>Location: </strong><%= @lodging.location %></p>
+<p><strong>Policy: </strong><%= @lodging.policy %></p>
+<p><strong>Description: </strong><%= @lodging.description %></p>
+<p><strong>Owner: </strong><%= User.find_by(id:@lodging.user_id).name %></p> 
+<p><strong>Email: </strong><%= User.find_by(id:@lodging.user_id).email %></p> 
+
+<% amenities = [] %>
+<% equipment = [] %>
+<% facilities = [] %>
+<% amenities_names = ["Romantic dinner on the beach", "Continental breakfast in the room", "Romantic discovery in the room", "Hair Dryer", "Towels", "Couples massage"] %>
+<% equipment_names = ["Fridge", "Shampoo", "Swimming pool", "Coffee maker", "Parking", "TV with cable" ] %>
+<% facilities_names = ["Recreational activities", "Dining options", "Breakfast included", "Gym", "Yoga area", "Good for programming"] %>
+<% @lodging.services.each do |service| %>
+  <% if service.kind >  12 %>
+    <% facilities.push(service.kind - 13) %>
+  <% elsif service.kind >  6 %>
+    <% equipment.push(service.kind - 7) %>
+  <% else %>
+    <% amenities.push(service.kind - 1) %>
+  <% end %>
+<% end %>
+
+<p><strong> Amenities </strong>
+<% if amenities.length > 0 %> ||
+  <% amenities.each do |x| %>
+    <%= amenities_names[x]%> ||
+  <% end %>
+<% end %>
+</p>
+
+<p><strong>Equipment: </strong>
+<% if equipment.length > 0 %> ||
+  <% equipment.each do |x| %>
+    <%= equipment_names[x]%> ||
+  <% end %>
+<% end %>
+</p>
+
+<p><strong>Facilities</strong>
+<% if facilities.length > 0 %> ||
+  <% facilities.each do |x| %>
+    <%= facilities_names[x] %> ||     
+  <% end %>
+<% end %>
+</p>
+
+<button type="button" class="btn btn-light">  <%= link_to 'Reviews', reviews_path(@lodging) %> </button>
+<button type="button" class="btn btn-light">  <%= link_to 'Back', lodgings_path %> </button>
+
+<% if current_user != nil %>
+  <% if current_user.role == 2 or @lodging.user_id == current_user.id %>
+  <button type="button" class="btn btn-light">  <%= link_to "Edit", edit_lodging_path(@lodging)%> </button>
+  <button type="button" class="btn btn-danger"><%= link_to 'Destroy', @lodging, method: :delete, data: { confirm: 'Are you sure?' } %>  </button>
+  <% end %>
+<% end %>
+
+<p><strong> Image </strong></p>
+<% if @lodging.image.attached? %>
+    <%= image_tag @lodging.image, style: "width:auto; height:400px; display: block" %>
+<% else %>
+  <%= image_tag "No-Image-Placeholder.png" , style: "width:auto; height:150px; display: block" %>
+<% end %>
+
+<p><strong> Video </strong></p>
+<% if @lodging.video.attached? %>
+  <div style="width:400px; height:400px">
+    <%= video_tag(url_for(@lodging.video), controls: '') %>
+  </div>
+<% else %>
+  <%= image_tag "no-video-placeholder.jpg" , style: "width:auto; height:150px; display: block" %>
+<% end %>
+
+
+<p><strong> Map </strong></p>
+
+
+<p>
+<%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&center=#51.501564,#-0.141944&key=#AIzaSyDr0zWMAPgZc7Rs3oLKLVAmVG3SczHRJuo", alt: "Map" %>
+</p>

@@ -1,0 +1,56 @@
+<div class="mx-auto" style="width: 50%;">
+  <%= form_for @lodging do |form| %>
+    <div class="form-group field">
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <%= form.label :title, class: "form-label" %>
+        <%= form.text_field :title, class: "form-control" %>
+    </div>
+
+
+    <div class="form-group field">
+      <%= form.label :fee, class: "form-label" %>
+      <%= form.number_field :fee, class: "form-control"%>
+    </div>
+
+    <div class="form-group field">
+      <%= form.label :location, class: "form-label" %>
+      <%= form.text_field :location, class: "form-control" %>
+    </div>
+
+    <div class="form-group field">
+      <%= form.label :policy, class: "form-label" %>
+      <%= form.text_field :policy, class: "form-control" %>
+    </div>
+
+    <div class="form-group field">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_field :description, class: "form-control" %>
+    </div>
+
+    <div class="form-group field">
+      <%= form.label :image, class: "form-label" %>
+      <%= form.file_field :image, class: "form-control" %> <!--  :multiple => true, -->
+    </div>
+
+    <div class="form-group field">
+      <%= form.label :video, class: "form-label" %>
+      <%= form.file_field :video, class: "form-control" %>
+    </div>
+
+    
+
+    <div class="row mt-3 ml-0">
+      <div class="form-group actions">
+          <%= form.submit class: "btn btn-primary" %>
+      </div>
+    </div>
+
+  <% end %>
+
+  </div>
+  <div class="row">
+    <div class="col mt-3">
+      <%= link_to 'Back', lodgings_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>

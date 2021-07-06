@@ -1,0 +1,12 @@
+<% if notice != nil%>
+  <div class="alert alert-primary" role="alert">
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+<p><strong>Check in: </strong><%= @stay.check_in %></p>
+<p><strong>Check out: </strong><%= @stay.check_out %></p>
+<p><strong>Lodging: </strong><%= Lodging.find_by(id:@stay.lodging_id) %></p>
+
+
+<%= link_to 'Back', root_path %>

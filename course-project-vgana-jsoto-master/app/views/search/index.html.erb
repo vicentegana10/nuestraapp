@@ -1,0 +1,138 @@
+<h3>Search User</h3> 
+  <%= form_tag("/search", method: "get", local: true)  %>
+    <%= collection_select(:get, :user_id, User.all, :id, :name, prompt: true) %>
+    <%= submit_tag("Search by email")  %>
+
+
+<div class="mx-auto" style="width: 50%;">
+  <h3> Search Lodgings  </h3>
+  <%= form_tag("/search", method: "get", local: true) %>
+  <div class="card" style="width: 40rem;">
+    <div class="form-group field">
+      <%= hidden_field :search, value: 1 %>
+      <h5 class="card-title"><%= label_tag :fee_min %>
+      <%= number_field_tag :fee_min%></h5>
+    </div>
+
+    <div class="form-group field">
+      <h5 class="card-title"><%= label_tag :fee_max  %>
+      <%= number_field_tag :fee_max%></h5>
+    </div>
+
+    <div class="form-group field">
+      <h5 class="card-title"><%= label_tag :location %>
+      <%= text_field_tag :location %></h5>
+    </div>
+
+    <h5>Amenities</h5>
+
+    <div class="form-group field">
+      <%= check_box_tag(:s1) %>
+      <%= label_tag(:s1, "Romantic dinner on the beach") %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= check_box_tag(:s2) %>
+      <%= label_tag(:s2, "Continental breakfast in the room") %>
+    </div>
+
+    <div class="form-group field">
+      <%= check_box_tag(:s3) %>
+      <%= label_tag(:s3, "Romantic discovery in the room") %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= check_box_tag(:s4) %>
+      <%= label_tag(:s4, "Hair Dryer") %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= check_box_tag(:s5) %>
+      <%= label_tag(:s5, "Towels") %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= check_box_tag(:s6) %>
+      <%= label_tag(:s6, "Couples massage") %>
+    </div>
+
+    <h5>Equipment</h5>
+
+    <div class="form-group field">
+      <%= check_box_tag(:s7) %>
+      <%= label_tag(:s7, "Fridge") %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= check_box_tag(:s8) %>
+      <%= label_tag(:s8, "Shampoo") %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= check_box_tag(:s9) %>
+      <%= label_tag(:s9, "Swimming pool") %>
+    </div>
+
+    <div class="form-group field">
+      <%= check_box_tag(:s10) %>
+      <%= label_tag(:s10, "Coffee maker") %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= check_box_tag(:s11) %>
+      <%= label_tag(:s11, "Parking") %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= check_box_tag(:s12) %>
+      <%= label_tag(:s12, "TV with cable") %>
+    </div>
+
+    <h5>Facilities</h5>
+
+    <div class="form-group field">
+      <%= check_box_tag(:s13) %>
+      <%= label_tag(:s13, "Recreational activities") %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= check_box_tag(:s14) %>
+      <%= label_tag(:s14, "Dining options") %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= check_box_tag(:s15) %>
+      <%= label_tag(:s15, "Breakfast included") %>
+    </div>
+
+    <div class="form-group field">
+      <%= check_box_tag(:s16) %>
+      <%= label_tag(:s16, "Gym") %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= check_box_tag(:s17) %>
+      <%= label_tag(:s17, "Yoga area") %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= check_box_tag(:s18) %>
+      <%= label_tag(:s18, "Good for programming") %>
+    </div>
+
+
+    </div>
+
+    <div class="row mt-3 ml-0">
+      <div class="form-group actions">
+        <%= submit_tag("Search")  %>
+      </div>
+    </div>
+  </div>
+  
+<% if @searched == 1 %>
+<% puts("RRRRRRRRRRR")%>
+  <% if @lodgings.length() > 0 %>
+  <div class="card-container">
+    <% @lodgings.each do |lodging| %>
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= lodging.title %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= lodging.location %></h6>
+          <p class="card-text"><%= lodging.description %></p>
+          <button type="button" class="btn btn-light"><p class="card-link"><%= link_to 'Show', lodging %></p></button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% else %>
+      <h2>No lodgings found</h2>  
+  <% end %>
+
+<% elsif @user_searched != nil %>
+  <div class="card-container">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= @user_searched.name %></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><%= @user_searched.email %></h6>
+      <p class="card-text"><%= @user_searched.bio %></p>
+    </div>
+  </div>
+</div> 
+<% end %>

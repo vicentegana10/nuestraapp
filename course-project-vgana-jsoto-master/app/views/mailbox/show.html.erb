@@ -1,0 +1,23 @@
+<% if notice != nil%>
+  <div class="alert alert-primary" role="alert">
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+<h1>Mailbox</h1> 
+
+<% if @mailbox.length() > 0 %>
+  <div class="card-container">
+    <% @mailbox.each do |message| %>
+
+      
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= User.all.find_by(id:message).name %></h5>
+          <p class="card-link"><%= link_to 'Show messages', root_path %></p>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+<% end %>

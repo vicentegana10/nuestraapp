@@ -1,0 +1,32 @@
+<% if notice != nil%>
+  <div class="alert alert-primary" role="alert">
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+<h1>Stays</h1>
+
+<% if @stays.length() > 0 %>
+  <div class="card-container">
+    <% @stays.each do |stay| %>
+      <% if stay != nil %>
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= Lodging.find_by(id:stay.lodging_id).title %></h5>
+            <p class="card-text"><%= stay.check_in %></p>
+            <p class="card-text"><%= stay.check_out %></p>
+            <button type="button" class="btn btn-warning"><%= link_to 'Show Lodging', lodging_path(stay.lodging_id)  %></p></button>
+            <% if stay.review != nil %>
+              <button type="button" class="btn btn-light"><%= link_to 'Show Review', review_path(stay.review.id)  %></p></button>
+            <% else %>
+              <button type="button" class="btn btn-danger"><%= link_to 'Write Review', new_review_path(stay.id)  %></p></button>
+            <% end %>
+            
+            <% puts(stay.id) %>
+            <!-- review_path(stay.review) -->
+          </div>
+        </div>
+        <% end %>
+    <% end %>
+  </div>
+<% end %>

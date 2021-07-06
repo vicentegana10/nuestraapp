@@ -1,0 +1,29 @@
+
+<% if notice != nil%>
+  <div class="alert alert-primary" role="alert">
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+<h1>Lodgings</h1>
+<% if user_signed_in?%>
+<button type="button" class="btn btn-light"><%= link_to 'New Lodging', new_lodging_path %></button>
+<% end%>
+<% if @lodgings.length() > 0 %>
+  <div class="card-container">
+    <% @lodgings.each do |lodging| %>
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= lodging.title %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= lodging.location %></h6>
+          <p class="card-text"><%= lodging.description %></p>
+          <button type="button" class="btn btn-light"><p class="card-link"><%= link_to 'Show', lodging %></p></button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+
+
+

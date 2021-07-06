@@ -1,0 +1,53 @@
+  <div class="mx-auto" style="width: 50%;">
+  <h2> Edit Lodging </h2>
+  <%= form_with(model: lodging, local: true) do |form| %>
+  <div class="card" style="width: 28rem;">
+    <div class="form-group field">
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <h5 class="card-title"><%= form.label :title, class: "form-label" %></h5>
+        <%= form.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="form-group field">
+      <h5 class="card-title"><%= form.label :fee, class: "form-label" %></h5>
+      <%= form.number_field :fee, class: "form-control" %>
+    </div>
+
+    <div class="form-group field">
+      <h5 class="card-title"><%= form.label :location, class: "form-label" %></h5>
+      <%= form.text_field :location, class: "form-control" %>
+    </div>
+
+    <div class="form-group field">
+      <h5 class="card-title"><%= form.label :policy, class: "form-label" %></h5>
+      <%= form.text_field :policy, class: "form-control" %>
+    </div>
+
+    <div class="form-group field">
+      <h5 class="card-title"><%= form.label :description, class: "form-label" %></h5>
+      <%= form.text_area :description, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+  
+      <h5 class="card-title"><%= form.label :image %></h5>
+      <%= form.file_field :image, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+
+      <h5 class="card-title"><%= form.label :video %></h5>
+      <%= form.file_field :video, class: "form-control" %>
+    </div>
+
+    
+    </div>
+
+    <div class="row mt-3 ml-0">
+      <div class="form-group actions">
+        <%= form.submit class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

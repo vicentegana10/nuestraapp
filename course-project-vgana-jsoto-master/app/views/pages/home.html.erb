@@ -1,0 +1,37 @@
+ <% if user_signed_in?%>
+<h3>Hello <%= @user.name%>, today is <%=I18n.t('date.day_names')[Date.today.wday]%>!</h3>
+<% end%>
+<h4>Is there anything you'd like to try out today?</h4>
+<p>Here are some cool suggestions for you:</p>
+<% if @lodgings.length() > 0 %>
+  <% if @lodgings.length() > 6 %>
+    <div class="card-container">
+      <% @lodgings[1..5].each do |lodging| %>
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= lodging.title %></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%= lodging.location %></h6>
+            <p class="card-text"><%= lodging.description %></p>
+            <button type="button" class="btn btn-light"><p class="card-link"><%= link_to 'Show', lodging %></p></button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <% else %>
+    <% @lodgings[1..@lodgings.length()].each do |lodging| %>
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= lodging.title %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= lodging.location %></h6>
+          <p class="card-text"><%= lodging.description %></p>
+          <button type="button" class="btn btn-light"><p class="card-link"><%= link_to 'Show', lodging %></p></button>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+<% end %>
+</div>
+
+<button type="button" class="btn btn-warning"><%= link_to 'Terms of Use', 'https://www.termsofusegenerator.net/live.php?token=OBDl9KmUnpFxxvbYsssDcXdYOvrRVWCW' %> </p></button>
+<button type="button" class="btn btn-warning"><%= link_to 'Terms of Service', 'https://www.termsofservicegenerator.net/live.php?token=EO4J8anwmDAMkem1CSMMXVPgbc7U7nqm' %> </p></button>

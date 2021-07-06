@@ -1,0 +1,10 @@
+
+<h2>Search User</h2> 
+<%= form_with(model: User, method: "get", local: true) do |form| %>
+    <%= form.collection_select :user_id, User.order(:email), :id, :email %>
+
+    <div class="form-group actions">
+        <%= submit_tag("Search by email")  %>
+    </div>
+<% end%>
+

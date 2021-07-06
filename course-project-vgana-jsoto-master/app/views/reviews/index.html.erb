@@ -1,0 +1,32 @@
+<% if notice != nil%>
+  <div class="alert alert-primary" role="alert">
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+<h1>Reviews of <%= @lodging.title%></h1>
+
+
+<% if @reviews.length() > 0 %>
+  <div class="card-container">
+    <% @reviews.each do |x| %>
+      <% if x != nil %>
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"> Rate: <%= x.rate %></h5>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            
+            <% (0..(x.rate - 1)).each do |n| %>
+                <span class="fa fa-star checked"></span>
+            <% end %>
+            <% (0..(5 - x.rate - 1)).each do |n| %>
+                <span class="fa fa-star"></span>
+            <% end %>
+
+            <p class="card-text"> Description: <%= x.description %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %> 

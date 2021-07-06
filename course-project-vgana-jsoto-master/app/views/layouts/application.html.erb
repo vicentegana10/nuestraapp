@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CourseProjectVganaJsoto</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'rails-ujs' %> 
+  </head>
+
+  <body>
+
+  <ul class="list-group list-group-horizontal">
+    <li class="list-group-item">NuestraApp</li>
+    <li class="list-group-item"><%=link_to 'Home', root_path %></li>
+    <li class="list-group-item"><%=link_to 'Lodgings', lodgings_path %></li>
+    <li class="list-group-item"><%=link_to 'Search', search_index_path %></li>
+    <% if user_signed_in?%>
+      <li class="list-group-item"><%=link_to 'Mailbox', mailbox_index_path %></li>
+      <li class="list-group-item"><%= link_to('My Account',  user_path(id:@user) )%></li>
+      <li class="list-group-item"><%= link_to('Sign out', destroy_user_session_path, method: :delete)%></li>
+      
+    <% else %>
+      <li class="list-group-item"><%= link_to('Sign in', new_user_session_path)%></li>
+      <li class="list-group-item"><%= link_to('Sign up', new_user_registration_path)%></li>
+    <% end %>
+
+  </ul>
+    <main>
+      <%= yield %>
+    </main>
+  </body>
+</html>

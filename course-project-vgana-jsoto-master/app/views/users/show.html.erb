@@ -1,0 +1,18 @@
+<% if notice != nil%>
+  <div class="alert alert-primary" role="alert">
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+<div class="card-container">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= @user.name %></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><%= @user.email %></h6>
+      <p class="card-text"><%= @user.bio %></p>
+      <%= link_to 'Edit', edit_user_path(@user) %>
+      <%= link_to 'Previous Stays', stays_path %>
+      <%= link_to 'Lodging offerings', lodgings_path(@user) %> 
+    </div>
+  </div>
+</div>

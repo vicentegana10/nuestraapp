@@ -1,0 +1,68 @@
+<% if notice != nil%>
+  <div class="alert alert-primary" role="alert">
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+<% if @messages.length() > 0 %>
+
+  <% mensaje1 = @messages.first %>
+  <% if mensaje1.sender_id == @user.id %>
+    <% messageUser = User.find_by(id:mensaje1.recipient_id).name %>
+  <% else %>
+    <% messageUser = User.find_by(id:mensaje1.sender_id).name %>
+  <% end %>
+  <h1><%= messageUser%> Chat</h1>
+
+  <% @messages.each do |message| %>
+
+    <% if message.sender_id == @user.id %>
+      <div class="card">
+        <div class="card-body" >
+          Sent: <%= message.text %>
+        <br>
+          Time: <%= message.created_at %>
+        </div>
+      </div>
+    <% else %>
+
+      <div class="card">
+        <div class="card-body-2" >
+          Recieved: <%= message.text %>
+          <br>
+          Time: <%= message.created_at %>
+        </div>
+      </div>
+
+
+    <% end %>
+
+  <% end %>
+
+
+
+<% end %>
+
+<div class="mx-auto" style="width: 50%;">
+  <%= form_for Message.new do |form| %>
+    <div class="form-group field">
+    <%= form.hidden_field :recipient_id, value: User.find_by(id: mensaje1.recipient_id).email %>
+        <%= form.label :text, class: "form-label" %>
+        <%= form.text_area :text, class: "form-control" %>
+    </div>
+
+    <div class="row mt-3 ml-0">
+      <div class="form-group actions">
+          <%= form.submit class: "btn btn-primary" %>
+      </div>
+    </div>
+
+  <% end %>
+
+  </div>
+  <div class="row">
+    <div class="col mt-3">
+      <%= link_to 'Back', mailbox_index_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
